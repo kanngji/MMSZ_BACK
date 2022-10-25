@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 // routes 의 boards를 가져옵니다
 const boardRoutes = require("./routes/boards");
+const userRoutes = require("./routes/user");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -20,7 +21,7 @@ app.use((req, res, next) => {
 // routes
 // baordRoutes를 사용한다고 선언
 app.use("/api/boards", boardRoutes);
-
+app.use("/api/user", userRoutes);
 // connet to db
 mongoose
   .connect(process.env.MONGO_URI)
