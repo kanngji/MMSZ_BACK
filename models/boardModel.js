@@ -39,5 +39,21 @@ const boardSchema = new Schema(
   { timestamps: true }
 );
 
+// static check method
+boardSchema.statics.checkboard = async function (
+  title,
+  content,
+  view,
+  like,
+  writtenTime
+) {
+  // validation
+  if (!title) {
+    throw Error("Title must be filled");
+  }
+  const board = await this.create({ title, content, view, like, writtenTime });
+  return board;
+};
+
 // 모듈 꺼내기
 module.exports = mongoose.model("Board", boardSchema);

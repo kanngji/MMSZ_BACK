@@ -1,11 +1,11 @@
 require("dotenv").config();
 
 const express = require("express");
-//mongoose
 const mongoose = require("mongoose");
 // routes 의 boards를 가져옵니다
 const boardRoutes = require("./routes/boards");
 const userRoutes = require("./routes/user");
+const eventRoutes = require("./routes/event");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -19,9 +19,9 @@ app.use((req, res, next) => {
 });
 
 // routes
-// baordRoutes를 사용한다고 선언
 app.use("/api/boards", boardRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/events", eventRoutes);
 // connet to db
 mongoose
   .connect(process.env.MONGO_URI)
