@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const eventSchema = new Schema(
   {
+    brandname: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -26,16 +30,25 @@ const eventSchema = new Schema(
 
 // static event method
 eventSchema.statics.checkevent = async function (
+  brandname,
   title,
   content,
   eventImage,
   postDate
 ) {
   // validation
-  if (!title || !content || !eventImage) {
-    throw Error("title and content and eventImage are must be filled");
+  if (!brandname || !title || !content || !eventImage) {
+    throw Error(
+      "brandName and title and content and eventImage are must be filled"
+    );
   }
-  const event = await this.create({ title, content, eventImage, postDate });
+  const event = await this.create({
+    brandname,
+    title,
+    content,
+    eventImage,
+    postDate,
+  });
   return event;
 };
 

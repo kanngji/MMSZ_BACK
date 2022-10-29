@@ -25,11 +25,17 @@ const getEvent = async (req, res) => {
 
 // create a new event
 const createEvent = async (req, res) => {
-  const { title, content, postDate, eventImage } = req.body;
+  const { brandname, title, content, postDate } = req.body;
 
   // add doc to db
   try {
-    const event = await Event.create({ title, content, postDate, eventImage });
+    const event = await Event.create({
+      brandname,
+      title,
+      content,
+      postDate,
+      eventImage: req.file.eventImage,
+    });
     res.status(200).json(event);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -51,7 +57,7 @@ const deleteEvent = async (req, res) => {
   res.status(200).json(event);
 };
 
-// updawte a event
+// update a event
 const updateEvent = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
