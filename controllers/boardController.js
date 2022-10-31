@@ -9,7 +9,7 @@ const getBoards = async (req, res) => {
 
 // get a single board
 const getBoard = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // :id
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such board" });
@@ -26,11 +26,21 @@ const getBoard = async (req, res) => {
 
 // create new board
 const createBoard = async (req, res) => {
-  const { title, content, view, like, writtenTime } = req.body;
+  const { seq, title, content, view, like, writtenTime } = req.body;
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+
+  if (emptyFields.length > 0) {
+    return res.status(400).json({ error: "Please fill in title", emptyFields });
+  }
 
   // add doc to db
   try {
     const board = await Board.create({
+      seq,
       title,
       content,
       view,

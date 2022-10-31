@@ -7,10 +7,10 @@ const Schema = mongoose.Schema;
 const boardSchema = new Schema(
   {
     // 글번호
-    //   seq: {
-    //     type: Number,
-    //     default: 0,
-    //   },
+    seq: {
+      type: Number,
+      default: 0,
+    },
     // 제목
     title: {
       type: String,
@@ -23,12 +23,14 @@ const boardSchema = new Schema(
     // 조회수
     view: {
       type: Number,
-      dafault: 0,
+
+      default: 0,
     },
     // 추천수
     like: {
       type: Number,
-      defualt: 0,
+
+      default: 0,
     },
     //작성일자
     writtenTime: {
@@ -41,6 +43,7 @@ const boardSchema = new Schema(
 
 // static check method
 boardSchema.statics.checkboard = async function (
+  seq,
   title,
   content,
   view,
@@ -51,7 +54,15 @@ boardSchema.statics.checkboard = async function (
   if (!title) {
     throw Error("Title must be filled");
   }
-  const board = await this.create({ title, content, view, like, writtenTime });
+
+  const board = await this.create({
+    seq,
+    title,
+    content,
+    view,
+    like,
+    writtenTime,
+  });
   return board;
 };
 
