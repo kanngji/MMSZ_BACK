@@ -24,7 +24,7 @@ const boardSchema = new Schema(
     view: {
       type: Number,
 
-      dafault: 0,
+      default: 0,
     },
     // 추천수
     like: {
@@ -54,6 +54,7 @@ boardSchema.statics.checkboard = async function (
   if (!title) {
     throw Error("Title must be filled");
   }
+
   const board = await this.create({
     seq,
     title,

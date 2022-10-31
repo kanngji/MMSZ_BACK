@@ -27,6 +27,15 @@ const getBoard = async (req, res) => {
 // create new board
 const createBoard = async (req, res) => {
   const { seq, title, content, view, like, writtenTime } = req.body;
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+
+  if (emptyFields.length > 0) {
+    return res.status(400).json({ error: "Please fill in title", emptyFields });
+  }
 
   // add doc to db
   try {
