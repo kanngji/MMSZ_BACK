@@ -6,10 +6,10 @@ const validator = require("validator");
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
   // 닉네임
-  nickname: {
-    type: String,
-    require: true,
-  },
+  // nickname: {
+  //   type: String,
+  //   required: true,
+  // },
   //이메일
   email: {
     type: String,
@@ -24,19 +24,19 @@ const userSchema = new Schema({
   isAdmin: {
     type: Boolean,
     default: false,
-    require: true,
+    required: true,
   },
 });
 
 // static signup method
 userSchema.statics.signup = async function (
-  nickname,
+  // nickname,
   email,
   password,
   isAdmin
 ) {
   // validation
-  if (!nickname || !email || !password) {
+  if (!email || !password) {
     throw Error("All fields must be filled");
   }
   if (!validator.isEmail(email)) {
@@ -55,8 +55,8 @@ userSchema.statics.signup = async function (
   // salt 생성 bcrypt
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
-  // 비밀번호에 hash 뭍히기
-  const user = await this.create({ nickname, email, password: hash, isAdmin });
+  // 비밀번호에 hash
+  const user = await this.create({ email, password: hash, isAdmin });
   return user;
 };
 
