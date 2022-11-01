@@ -13,6 +13,7 @@ const {
 
 const router = express.Router();
 // require auth for all board routes
+
 // router.use(requireAuth);
 
 // GET all boards
