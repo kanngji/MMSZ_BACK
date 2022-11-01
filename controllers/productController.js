@@ -1,9 +1,17 @@
-const Event = require("../models/eventModel");
+const Product = require("../models/productModel");
 const { mongoose } = require("mongoose");
+const data = require("../src/data");
 
-// get all events
-const getEvents = async (req, res) => {
-  const events = await Event.find({}).sort({ createdAt: -1 });
+// push all product
+const pushAllProduct = async (req, res) => {
+  console.log(Product);
+  const result = await Product.collection.insertOne(data);
+  res.status(200).json(result);
+};
+
+// get all product
+const getAllProduct = async (req, res) => {
+  const events = await Product.find({}).sort({ createdAt: -1 });
   res.status(200).json(events);
 };
 
@@ -14,7 +22,7 @@ const getEvent = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValeid(id)) {
     return res.status(404).json({ error: "No such event" });
   }
-  const event = await Event.findById(id);
+  const event = await Product.findById(id);
 
   if (!event) {
     return res.status(404).json({ error: "No such event" });
@@ -29,7 +37,7 @@ const createEvent = async (req, res) => {
 
   // add doc to db
   try {
-    const event = await Event.create({
+    const event = await Product.create({
       brandname,
       title,
       content,
@@ -49,7 +57,7 @@ const deleteEvent = async (req, res) => {
     return res.status(404).json({ error: "No such event" });
   }
 
-  const event = await Event.findOneAndDelete({ _id: id });
+  const event = await Product.findOneAndDelete({ _id: id });
 
   if (!event) {
     return res.status(404).json({ error: "No such event" });
@@ -63,7 +71,7 @@ const updateEvent = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such event" });
   }
-  const event = await Event.findOneAndUpdate(
+  const event = await Product.findOneAndUpdate(
     {
       _id: id,
     },
@@ -78,7 +86,8 @@ const updateEvent = async (req, res) => {
 module.exports = {
   createEvent,
   getEvent,
-  getEvents,
+  getAllProduct,
+  pushAllProduct,
   deleteEvent,
   updateEvent,
 };

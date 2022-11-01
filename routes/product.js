@@ -1,12 +1,17 @@
 const express = require("express");
 
+// controller functions
+const {
+  pushAllProduct,
+  getAllProduct,
+} = require("../controllers/productController");
+
 const router = express.Router();
 
-const data = require("../src/data");
+// login route
+router.post("/push", pushAllProduct);
 
-// 상품 데이터 전체 받아오기
-router.get("/getdata", (req, res) => {
-  res.send(data);
-});
+// signup router
+router.get("/getAll", getAllProduct);
 
 module.exports = router;

@@ -4,52 +4,78 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
   {
-    nickname: {
+    _id: {
       type: String,
       required: true,
     },
-    content: {
+    name: {
       type: String,
       required: true,
     },
-    content: {
+    category: {
       type: String,
       required: true,
     },
-    eventImage: {
+    image: {
       type: String,
       required: true,
     },
-    postDate: {
-      type: Date,
-      default: Date.now,
+    price: {
+      type: String,
+      required: true,
     },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    numReviews: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    review: {
+      type: Array,
+      required: false,
+    }
   },
   { timestamps: true }
 );
 
 // static event method
-eventSchema.statics.checkevent = async function (
-  brandname,
-  title,
-  content,
-  eventImage,
-  postDate
+productSchema.statics.checkevent = async function (
+  _id,
+  name,
+  category,
+  image,
+  price,
+  brand,
+  rating,
+  numReviews,
+  description,
+  review
 ) {
   // validation
-  if (!brandname || !title || !content || !eventImage) {
+  if (!_id || !name || !category || !image || !price || !brand || !description) {
     throw Error(
-      "brandName and title and content and eventImage are must be filled"
+      "_id, name, category, image, price, brand, description are must be filled"
     );
   }
-  const event = await this.create({
-    brandname,
-    title,
-    content,
-    eventImage,
-    postDate,
+  const product = await this.create({
+    _id,
+    name,
+    category,
+    image,
+    price,
+    brand,
+    rating,
+    numReviews,
+    description,
+    review
   });
-  return event;
+  return product;
 };
 
-module.exports = mongoose.model("Event", eventSchema);
+module.exports = mongoose.model("Product", productSchema);

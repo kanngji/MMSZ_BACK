@@ -6,9 +6,8 @@ const data = {
       category: "coldbrew",
       image: "/images/coldbrew.jpg",
       price: "5,500",
-      countInStock: 0,
       brand: "STARBUCKS",
-      rating: 3,
+      rating: 4.5,
       numReviews: 2,
       description: "high quality product",
       review: [
@@ -31,7 +30,7 @@ const data = {
       countInStock: 100,
       brand: "STARBUCKS",
       rating: 4.5,
-      numReviews: 10,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
@@ -52,8 +51,8 @@ const data = {
       price: "6,500",
       countInStock: 1,
       brand: "STARBUCKS",
-      rating: 2,
-      numReviews: 10,
+      rating: 4.5,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
@@ -74,8 +73,8 @@ const data = {
       price: "5,500",
       countInStock: 7,
       brand: "STARBUCKS",
-      rating: 3,
-      numReviews: 10,
+      rating: 4.5,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
@@ -97,7 +96,7 @@ const data = {
       countInStock: 5,
       brand: "STARBUCKS",
       rating: 4.5,
-      numReviews: 10,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
@@ -118,8 +117,8 @@ const data = {
       price: "6,500",
       countInStock: 3,
       brand: "STARBUCKS",
-      rating: 2,
-      numReviews: 10,
+      rating: 4.5,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
@@ -139,8 +138,8 @@ const data = {
       image: "/images/coldbrew.jpg",
       price: "5,500",
       brand: "STARBUCKS",
-      rating: 3,
-      numReviews: 10,
+      rating: 4.5,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
@@ -162,7 +161,7 @@ const data = {
       countInStock: 2,
       brand: "STARBUCKS",
       rating: 4.5,
-      numReviews: 10,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
@@ -183,8 +182,8 @@ const data = {
       price: "6,500",
       countInStock: 10,
       brand: "STARBUCKS",
-      rating: 2,
-      numReviews: 10,
+      rating: 4.5,
+      numReviews: 2,
       description: "high quality product",
       review: [
         {
