@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require('cors');
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -6,12 +7,14 @@ const mongoose = require("mongoose");
 const boardRoutes = require("./routes/boards");
 const userRoutes = require("./routes/user");
 const eventRoutes = require("./routes/event");
+const productRoutes = require("./routes/product");
 
 const app = express();
 const PORT = process.env.PORT;
 
 // middle ware
 app.use(express.json());
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -22,6 +25,7 @@ app.use((req, res, next) => {
 app.use("/api/boards", boardRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/product", productRoutes);
 // connet to db
 mongoose
   .connect(process.env.MONGO_URI)
