@@ -3,12 +3,14 @@ const { mongoose } = require("mongoose");
 
 // get all events
 const getEvents = async (req, res) => {
+  console.log("sdfsdf");
   const events = await Event.find({}).sort({ createdAt: -1 });
   res.status(200).json(events);
 };
 
 // get a single event
 const getEvent = async (req, res) => {
+  // console.log("!");
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValeid(id)) {
@@ -26,6 +28,7 @@ const getEvent = async (req, res) => {
 // create a new event
 const createEvent = async (req, res) => {
   const { brandname, title, content, postDate } = req.body;
+  console.log(req.file);
 
   // add doc to db
   try {
@@ -34,7 +37,7 @@ const createEvent = async (req, res) => {
       title,
       content,
       postDate,
-      eventImage: req.file.eventImage,
+      eventImage: req.file.originalname,
     });
     res.status(200).json(event);
   } catch (error) {
