@@ -14,7 +14,8 @@ const loginUser = async (req, res) => {
 
     // create a token
     const token = createToken(user._id);
-    res.status(200).json({ email, token });
+    res.status(200).json({ user, email, token });
+    console.log("로그인성공");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -22,15 +23,16 @@ const loginUser = async (req, res) => {
 
 // signup user
 const signupUser = async (req, res) => {
-  const { nickname, email, password, isAdmin } = req.body;
+  const { email, password, isAdmin } = req.body;
 
   try {
-    const user = await User.signup(nickname, email, password, isAdmin);
+    const user = await User.signup(email, password, isAdmin);
 
     // create a token
     const token = createToken(user._id);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ user, email, token });
+    console.log("회원가입 성공");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

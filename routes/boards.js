@@ -9,7 +9,12 @@ const {
   updateBoard,
 } = require("../controllers/boardController");
 
+// const requireAuth = require("../middleware/requireAuth");  사용자 인증 미들웨어 댓글쓰기때 쓰면 좋을듯
+
 const router = express.Router();
+// require auth for all board routes
+
+// router.use(requireAuth);
 
 // GET all boards
 router.get("/", getBoards);
