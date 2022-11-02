@@ -4,14 +4,20 @@ const express = require("express");
 const {
   pushAllProduct,
   getAllProduct,
+  writeReivew,
 } = require("../controllers/productController");
 
 const router = express.Router();
 
-// login route
+// push router
 router.post("/push", pushAllProduct);
 
-// signup router
+// getAll router
 router.get("/getAll", getAllProduct);
+
+// write router
+router.post("/write", writeReivew);
+
+
 
 module.exports = router;
