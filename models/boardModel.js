@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 // 자동증가를 위해서
-// const AutoIncrement = require("mongoose-sequence")(mongoose);
+const autoIncrement = require("mongoose-auto-increment");
+autoIncrement.initialize(mongoose.connection);
 
 const Schema = mongoose.Schema;
 
@@ -38,7 +39,8 @@ const boardSchema = new Schema(
       default: Date.now,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  { collection: "", versionKey: false }
 );
 
 // static check method
@@ -65,6 +67,12 @@ boardSchema.statics.checkboard = async function (
   });
   return board;
 };
+boardSchema.plugin(autoIncrement.plugin, {
+  model: "boardModel",
+  field: "seq",
+  startAt: 1, // 시작
+  increment: 1, //증가
+});
 
 // 모듈 꺼내기
 module.exports = mongoose.model("Board", boardSchema);
