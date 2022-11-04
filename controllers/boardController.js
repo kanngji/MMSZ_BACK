@@ -10,6 +10,7 @@ const getBoards = async (req, res) => {
 // get a single board
 const getBoard = async (req, res) => {
   const { id } = req.params; // :id
+  console.log("!");
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such board" });
@@ -23,10 +24,31 @@ const getBoard = async (req, res) => {
 
   res.status(200).json(board);
 };
+// create increase view
+const incView = async (req, res) => {
+  console.log(req.params);
+  const result = await Board.collection.updateOne(
+    { seq: parseInt(req.params.id) },
+    { $inc: { view: +1 } }
+  );
+  console.log(result);
+};
+// plus like
+const incLike = async (req, res) => {
+  console.log(req.params);
+  const result = await Board.collection.updateOne(
+    { seq: parseInt(req.params.id) },
+    { $inc: { like: +1 } }
+  );
+  if (result.acknowledged) {
+    res.send(JSON.stringify("좋아요 추가"));
+  }
+};
 
 // create new board
 const createBoard = async (req, res) => {
   const { seq, title, content, view, like, writtenTime } = req.body;
+
   let emptyFields = [];
 
   if (!title) {
@@ -47,7 +69,7 @@ const createBoard = async (req, res) => {
       like,
       writtenTime,
     });
-    res.status(200).json(board);
+    const sequenceDocument = await res.status(200).json(board);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -70,6 +92,7 @@ const deleteBoard = async (req, res) => {
 
 // update a workout
 const updateBoard = async (req, res) => {
+  console.log(req.body);
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such board" });
@@ -92,4 +115,6 @@ module.exports = {
   getBoards,
   deleteBoard,
   updateBoard,
+  incView,
+  incLike,
 };
